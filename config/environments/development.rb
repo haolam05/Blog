@@ -68,5 +68,12 @@ Rails.application.configure do
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
 
+
+  # for devise set up
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+  # for active storage
+  config.active_storage.service = :local
+  config.action_controller.default_url_options = { host: 'localhost', port: 3000 }
+  config.active_storage.variant_processor = :mini_magick
 end

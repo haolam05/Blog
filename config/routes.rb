@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
+  resources :posts
   devise_for :users
-  root 'pages#about'
+  root 'posts#index'
   get 'about', to: 'pages#about'
 
   devise_scope :user do

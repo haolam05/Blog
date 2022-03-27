@@ -1,0 +1,31 @@
+<div class="container">
+
+      <%# from pagination %>
+      <div class="digg_pagination">
+          <%# <div class="page_info"><%= page_entries_info @posts, renderer: WillPaginate::ActionView::BootstrapLinkRenderer</div> %> 
+          <%= will_paginate @posts, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+      </div>
+      <%# from pagination %>
+
+
+
+    <% @posts.each do |post| %>
+      <div class="row">
+          <div class="card mb-3">
+              <img class="card-img-top" src="<%= url_for post.optimized_image(post.thumbnail, 586, 180) %>" alt="Blog Post Image Card" />
+              
+              <div class="card-body">
+                  <h5 class="card-title"><%= link_to post.title, post %></h5>
+                  <p class="card-text"><%= post.body.to_plain_text.truncate_words(50) %></p>  <%# workaround for action text => to_plain_text() => then truncate %>
+                  <p class="card-text">
+                      <small class="text-muted">
+                          <%= post.updated_at.strftime("%A, %B %e, %Y") %> by
+                          <%= post.user.username %> | <%= pluralize(post.views, "View") %> | 0 comments
+                      </small>
+                  </p>
+              </div>
+              
+          </div>
+      </div>
+    <% end %>
+</div>

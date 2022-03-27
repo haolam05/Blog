@@ -49,7 +49,7 @@ gem "bootsnap", require: false
 # gem "sassc-rails"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-# gem "image_processing", "~> 1.2"
+gem "image_processing", "~> 1.2"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -77,3 +77,15 @@ end
 gem "devise", "~> 4.8"
 
 gem "simple_form", "~> 5.1"
+
+gem "mini_magick", "~> 4.11"
+
+gem "faker", "~> 2.20"
+
+gem "open-uri", "~> 0.2.0"
+
+gem 'will_paginate-bootstrap-style'
+
+gem "will_paginate", "~> 3.3"
+
+gem "friendly_id", "~> 5.4"
