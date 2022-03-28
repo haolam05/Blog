@@ -22,7 +22,7 @@
                   <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                       <li>
                           <% if current_user.admin %>
-                              <a class="dropdown-item" href="#">New Post</a>
+                              <a class="dropdown-item" href="<%= new_post_path %>">New Post</a>
                           <% end %>
                       </li>
                       <li><a class="dropdown-item" href="<%= edit_user_registration_path %>">Account Settings</a></li>

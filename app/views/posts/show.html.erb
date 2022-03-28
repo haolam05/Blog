@@ -17,3 +17,13 @@
     </div>
   </div>
 </div>
+
+<div class="container">
+  <%= render "comments/form", commentable: @post, local: Comment.new %>             <!-- post's reply form -->
+
+  <div id="container">
+    <% @comments.each do |comment| %>   
+      <%= render comment %>                                                         <!-- "comments/comment" partial -->
+    <% end %>
+  </div>
+</div>

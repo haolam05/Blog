@@ -12,6 +12,7 @@ class PostsController < ApplicationController
   def show
     @post.views += 1
     @post.save
+    @comments = @post.comments.order("created_at DESC")
   end
 
   # GET /posts/new

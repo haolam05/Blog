@@ -1,11 +1,14 @@
 class Post < ApplicationRecord
   belongs_to :user
 
-  # Active Storage
+  # for polymorphic Comments
+  has_many :comments, as: :commentable, dependent: :destroy
+
+  # for active Storage
   has_one_attached :thumbnail
   has_one_attached :banner
   
-  # Action Text from Rails
+  # for action Text from Rails
   has_rich_text :body      
 
   validates :title, length: { minimum: 5 }

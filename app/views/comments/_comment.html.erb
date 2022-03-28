@@ -1,0 +1,20 @@
+<div class="comment-container", id="comment-<%= comment.id %>">
+    <div class="container">
+        <%# all PREVIOUS replies of current comment %>
+        <%= render 'comments/comments', comment: comment, local: Comment.new %>
+
+        <%# current comment's NEW reply form %>
+        <% unless comment.reply %>                  <!-- uncomment for infinite nested comments-->
+            <div class="row">
+                <div class="col-4">
+
+                </div>
+                <div class="col-8">
+                    <div class="comment-form-nested">
+                        <%= render 'comments/form', commentable: comment, local: Comment.new %>
+                    </div>
+                </div>
+            </div>
+        <% end %>
+    </div>
+</div>

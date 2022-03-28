@@ -1,9 +1,45 @@
 @import 'bootstrap/scss/bootstrap';
-@import 'bootstrap-icons/font/bootstrap-icons';@import 'actiontext.css';
+@import 'bootstrap-icons/font/bootstrap-icons';
+@import 'actiontext.css';
+@import './posts.scss';
+@import './pagination.css';
 
 .jumbotron {
     padding: 2rem 1rem;
     margin-bottom: 2rem;
     background-color: #e9ecef;
     border-radius: .3rem;
+}
+
+.trix-content {
+    .attachment-gallery {
+
+        >action-text-attachment,
+        >.attachment {
+            flex: 1 0 33%;
+            padding: 0 0.5em;
+            max-width: 33%;
+        }
+
+        &.attachment-gallery--2,
+        &.attachment-gallery--4 {
+
+            >action-text-attachment,
+            >.attachment {
+                flex-basis: 50%;
+                max-width: 50%;
+            }
+        }
+    }
+
+    action-text-attachment {
+        .attachment {
+            padding: 0 !important;
+            max-width: 100% !important;
+        }
+    }
+}
+
+.container {
+    padding-right: 0.75rem;
 }
