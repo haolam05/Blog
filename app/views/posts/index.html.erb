@@ -19,8 +19,19 @@
                   <p class="card-text"><%= post.body.to_plain_text.truncate_words(50) %></p>  <%# workaround for action text => to_plain_text() => then truncate %>
                   <p class="card-text">
                       <small class="text-muted">
-                          <%= post.updated_at.strftime("%A, %B %e, %Y") %> by
-                          <%= post.user.username %> | <%= pluralize(post.views, "View") %> | 0 comments
+                            <%= post.updated_at.strftime("%A, %B %e, %Y") %> by
+                            <%= post.user.username %> | <%= pluralize(post.views, "View") %> | 
+                          
+                            <% @num_comments = post.comments.count %>
+                            <% post.comments.each do |comment| %>
+                                <% @num_comments += comment.comments.count %>
+                            <% end %>
+                            
+                            <%= pluralize(@num_comments, "Comment") %> |
+
+                            <% if current_user && (post.user || current_user.admin) %>
+                                <%= link_to "Delete", post, method: :delete, data: { confirm: "Are you sure?" } %>
+                            <% end %>
                       </small>
                   </p>
               </div>

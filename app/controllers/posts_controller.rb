@@ -13,6 +13,9 @@ class PostsController < ApplicationController
     @post.views += 1
     @post.save
     @comments = @post.comments.order("created_at DESC")
+
+    @num_comments = @post.comments.count
+    @post.comments.each { |comment| @num_comments += comment.comments.count }
   end
 
   # GET /posts/new

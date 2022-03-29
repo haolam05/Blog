@@ -7,9 +7,32 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_one_attached :avatar
 
-  def username
-    self.email.split('@')[0].capitalize
+  validates :username, presence: true, uniqueness: {case_sensitive: false}
+  validate :validate_username
+
+  attr_writer :login
+
+  def validate_username
+    errors.add(:username, :invalid) if User.where(email: username).exists?
   end
+
+  def login
+    @login || username || email
+  end
+
+  def self.find_for_database_authentication(warden_conditions)
+    conditions = warden_conditions.dup
+    
+    if login = conditions.delete(:login)
+      where(conditions.to_h).where(["lower(username) = :value OR lower(email) = :value", { :value => login.downcase }]).first
+    elsif conditions.has_key?(:username) || conditions.has_key?(:email)
+      where(conditions.to_h).first
+    end
+  end
+
+  # def username
+  #   self.email.split('@')[0].capitalize
+  # end
 
   def comment_created
     self.number_of_comments += 1

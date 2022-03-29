@@ -1,20 +1,32 @@
-<%# REPLY FORM %>
-<div class="row">
-    <div class="comment-form">
-        <%= form_with model: [commentable, local] do |f| %>     <%# The form action is automatically filled with an appropriate values for @post and @comment %>
-            <div class="form-group">                            <%# params[:post][:post_attributes]   ||    params[:comment][:comment_attribute] %>
-                <%= f.rich_text_area :body, placeholder: "Say something...", class: "reply-form-#{commentable.id}", id: f.object.object_id, method: :patch %>
-                <%= f.submit "Post", class: "btn btn-dark float-right" %>
-            </div>
-        <% end %>
+<% if current_user %>
+    <%# REPLY FORM %>
+    <div class="row">
+        <div class="comment-form">
+            <%= form_with model: [commentable, local] do |f| %>     <%# The form action is automatically filled with an appropriate values for @post and @comment %>
+                <div class="form-group">                            <%# params[:post][:post_attributes]   ||    params[:comment][:comment_attribute] %>
+                    <%= f.rich_text_area :body, placeholder: "Say something...", class: "reply-form-#{commentable.id}", id: f.object.object_id, method: :patch %>
+                    <%= f.submit "Post", class: "btn btn-dark float-right" %>
+                </div>
+            <% end %>
+        </div>
     </div>
-</div>
 
-<script>
-    $(document).on("turbolinks:load", function() {                          // listen for drag and drop file into rich_text_area
-        $(".trix-button-group--file-tools").remove();                       // remove the attached file
-        document.addEventListener("trix-file-accept", function(event) {     // preventDefault behavior
-            event.preventDefault();
+    <script>
+        $(document).on("turbolinks:load", function() {                          // listen for drag and drop file into rich_text_area
+            $(".trix-button-group--file-tools").remove;                       // remove the attached file
+            document.addEventListener("trix-file-accept", function(event) {     // preventDefault behavior
+                event.preventDefault();
+            });
         });
-    });
-</script>
+    </script>
+<% else %>
+    <div class="row">
+        <div class="col-2"></div>
+        
+        <div class="col-8">
+            <h2 class="comment-login-prompt"><%= link_to "Login", new_user_session_path %> to comment</h2>
+        </div>
+
+        <div class="col-2"></div>
+    </div>
+<% end %>
