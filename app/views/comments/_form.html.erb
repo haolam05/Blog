@@ -13,7 +13,7 @@
 
     <script>
         $(document).on("turbolinks:load", function() {                          // listen for drag and drop file into rich_text_area
-            $(".trix-button-group--file-tools").remove;                       // remove the attached file
+            $(".trix-button-group--file-tools").remove();                       // remove the attached file
             document.addEventListener("trix-file-accept", function(event) {     // preventDefault behavior
                 event.preventDefault();
             });
